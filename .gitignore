@@ -1,0 +1,25 @@
+# Rust build artifacts
+target/
+**/*.rs.bk
+
+# Node / N-API binaries & dependencies
+node_modules/
+dist/
+out/
+release/
+*.node
+
+# Test & coverage
+coverage/
+.vite/
+
+# OS / Environment
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.log
+
+# Local Archives & Agent configs
+_archive/
+.agents/

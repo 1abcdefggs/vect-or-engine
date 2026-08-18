@@ -1,0 +1,39 @@
+{
+  "name": "@vect-or-engine/core",
+  "version": "0.2.0",
+  "description": "High-performance vector search (HNSW) and semantic validation native engine in Rust",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "1abcdefggs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vect-or-edit-or/vect-or-engine"
+  },
+  "napi": {
+    "name": "vect-or-engine-napi",
+    "version": "0.2.0",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-pc-windows-msvc"
+      ]
+    }
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "@types/node": "^18.19.3",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">= 18"
+  },
+  "scripts": {
+    "test": "node test/test-napi.js",
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release --cargo-cwd ../vect-or-edit",
+    "build:debug": "napi build --platform --cargo-cwd ../vect-or-edit",
+    "prepublishOnly": "napi prepublish --cargo-cwd ../vect-or-edit",
+    "version": "napi version"
+  }
+}
