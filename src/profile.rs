@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 

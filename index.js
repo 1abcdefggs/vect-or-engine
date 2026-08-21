@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */

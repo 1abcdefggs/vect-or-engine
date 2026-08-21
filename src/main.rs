@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 //! vect-or-engine -- stdin/stdout JSON-RPC server (Phase 1+3).
 //!
 //! Phase 1: tokio async runtime, mpsc-serialised stdout, Arc<tokio::sync::RwLock>.
@@ -8,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
 use tokio::sync::{mpsc, RwLock};
-use vect_or_engine::{EngineError, KnowledgeStore, Profile, Translator, Validator};
+use vect_or_engine_lib::{EngineError, KnowledgeStore, Profile, Translator, Validator};
 
 // RPC types
 #[derive(Deserialize, Debug)]

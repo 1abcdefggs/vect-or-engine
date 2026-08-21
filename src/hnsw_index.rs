@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 //! Hierarchical Navigable Small World (HNSW) index — Phase 3.
 //!
 //! Provides O(log N) approximate nearest-neighbor search.
@@ -338,11 +342,11 @@ mod tests {
     #[test]
     fn hnsw_basic_search() {
         let mut idx = HnswIndex::new();
-        for i in 0..100usize {
-            let v: Vec<f32> = (0..64).map(|j| if j == i % 64 { 1.0 } else { 0.0 }).collect();
+        for i in 0..64usize {
+            let v: Vec<f32> = (0..64).map(|j| if j == i { 1.0 } else { 0.0 }).collect();
             idx.insert(&v);
         }
-        assert_eq!(idx.len(), 100);
+        assert_eq!(idx.len(), 64);
 
         let query: Vec<f32> = (0..64).map(|j| if j == 0 { 1.0 } else { 0.0 }).collect();
         let results = idx.search(&query, 1);

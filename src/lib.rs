@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 //! vect-or-engine library crate.
 //!
 //! All domain modules are declared here and re-exported so that:

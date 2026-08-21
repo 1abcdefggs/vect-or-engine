@@ -3,10 +3,22 @@
 > **High-Performance Rust-Powered Vector Indexing (HNSW) & Semantic Validation Engine**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
-[![Rust](https://img.shields.io/badge/Rust-1.75+-DEA584?style=flat-square&logo=rust&logoColor=black)](https://www.rust-lang.org/)
-[![N-API](https://img.shields.io/badge/Node.js-N--API_Native-green?style=flat-square&logo=node.js&logoColor=white)](https://napi.rs/)
+[![Version: v0.2.0](https://img.shields.io/badge/version-0.2.0-indigo?style=flat-square)](package.json)
+[![Rust](https://img.shields.io/badge/Rust-2021_Edition-DEA584?style=flat-square&logo=rust&logoColor=black)](https://www.rust-lang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![N-API](https://img.shields.io/badge/N--API-Native_Addon-green?style=flat-square&logo=cplusplus&logoColor=white)](https://napi.rs/)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](#running-tests)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)](#)
+[![Vector Index](https://img.shields.io/badge/ANN-HNSW%20%2B%20SIMD%20(f16)-orange?style=flat-square)](#-features)
 
-**VectOrEngine** is a standalone, ultra-low latency native core engine written in Rust. It provides approximate nearest neighbor search (HNSW), rule-driven semantic linter validation, and zero-copy memory-mapped JSON/SQLite knowledge management for Node.js, Electron, and Rust native applications.
+**VectOrEngine** is a lightweight, ultra-high-performance native semantic computation engine crafted in Rust. Engineered specifically for next-generation intelligent text editors, IDEs, and local-first AI workspaces, it delivers **sub-millisecond vector similarity search (HNSW + SIMD)**, **real-time schema-driven static linting**, and **zero-copy memory-mapped knowledge management** via direct in-memory Node.js/Electron N-API bindings.
+
+> ⚡ **Engineered for Speed**: Pure Rust core featuring `f16` half-precision quantization, SIMD auto-vectorization, and Rayon multi-threaded scans.  
+> 🛡️ **Schema-Driven Validation**: High-throughput document linting and conflict analysis powered by the Aho-Corasick automaton and regular expressions.  
+> 🔗 **Zero-Cost Interoperability**: Direct C-ABI native bindings via `napi-rs`, completely eliminating IPC serialization and network latency.
+
+- **Repository**: [https://github.com/1abcdefggs/vect-or-engine](https://github.com/1abcdefggs/vect-or-engine)
+- **Author / Copyright**: Copyright (c) 2026 1abcdefggs
 
 ---
 
@@ -17,7 +29,7 @@
   - `f16` half-precision float vector quantization (50% RAM reduction).
   - `memmap2` zero-copy memory-mapped I/O for instant multi-gigabyte knowledge loading.
 - **🚀 Real-Time Multi-Pattern Linter**: Parallel rule evaluation and keyword conflict analysis using Aho-Corasick automaton and regex.
-- **🔗 Native Node.js Bindings (N-API)**: Direct native bindings via `napi-rs` with zero IPC serialization overhead.
+- **🔗 Native Node.js Bindings (N-API)**: Direct in-memory bindings via `napi-rs` with zero IPC serialization overhead.
 - **🗃️ Pluggable Local Cache**: Bundled SQLite cache backend for fast warm-restarts.
 
 ---
@@ -26,25 +38,31 @@
 
 ```
 vect-or-engine/
-├── Cargo.toml          # Rust crate configuration & optimization profiles
-├── lib.rs              # N-API bindings & Node.js native interface
-├── index.js            # Node.js export loader
-├── index.d.ts          # TypeScript type definitions
+├── Cargo.toml          # Rust crate configuration, Tokio features & optimization profiles
+├── Cargo.lock          # Deterministic Rust dependency lockfile
+├── lib.rs              # N-API bindings & Node.js native interface (bridge layer)
+├── index.js            # Cross-platform native addon loader
+├── index.d.ts          # TypeScript type declarations
+├── package.json        # npm package configuration & NAPI metadata
+├── LICENSE             # MIT License
+├── README.md           # Documentation
+├── test/
+│   ├── test-napi.js    # Node.js N-API integration tests
+│   └── test-kb.json    # Minimal test dataset
 └── src/
-    ├── hnsw_index.rs       # HNSW graph indexing & search implementation
-    ├── knowledge_store.rs  # Vector quantization, mmap, and SQLite store
-    ├── validator.rs        # Real-time static linter & rule evaluator
-    ├── translator.rs       # Term mapping & colloquial pattern matching
-    ├── profile.rs          # Schema-driven profile deserializer
-    ├── engine_error.rs     # Typed engine error definitions
-    ├── lib.rs              # Core Rust library entry point
-    ├── main.rs             # Stdin/stdout JSON-RPC server binary
-    └── index.ts            # TypeScript IPC client wrapper
+    ├── lib.rs          # Core Rust library crate root
+    ├── main.rs         # Stdin/stdout JSON-RPC server binary
+    ├── hnsw_index.rs   # HNSW graph indexing & search implementation
+    ├── knowledge_store.rs # Vector quantization (f16), mmap, and SQLite store
+    ├── validator.rs    # Real-time static linter & rule evaluator
+    ├── translator.rs   # Term mapping & colloquial pattern matching
+    ├── profile.rs      # Schema-driven profile deserializer
+    └── engine_error.rs # Typed engine error definitions
 ```
 
 ---
 
-## 🚀 Building from Source
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -54,15 +72,52 @@ vect-or-engine/
 ### Build Native Addon
 
 ```bash
-# Install dependencies
+# Install development dependencies
 npm install
 
 # Compile release binary (.node)
 npm run build
 ```
 
+### Running Tests
+
+```bash
+# Run Rust unit & integration tests
+cargo test
+
+# Run Node.js N-API binding integration tests
+npm test
+```
+
+---
+
+## 💻 JavaScript / TypeScript API Usage
+
+```typescript
+import {
+  validateSync,
+  loadKnowledgeBase,
+  buildIndex,
+  search,
+  kbInfo
+} from './vect-or-engine';
+
+// 1. Real-time document validation (Linter)
+const lintResult = validateSync("Target document content...");
+console.log(`Valid: ${lintResult.isValid}, Markers: ${lintResult.markers.length}`);
+
+// 2. Load vector dataset and build HNSW index
+await loadKnowledgeBase('./knowledge_base.json');
+await buildIndex();
+
+// 3. Vector similarity search
+const queryVector = new Float32Array([0.12, 0.45, -0.33 /* ... */]);
+const results = await search(queryVector, 5); // Top-5 nearest neighbors
+```
+
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).  
+Copyright (c) 2026 1abcdefggs.

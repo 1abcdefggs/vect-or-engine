@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 //! NAPI-rs bindings for vect-or-engine (Phase 2).
 //! Exposes the core Rust engine functions to Node.js as a native addon.
 

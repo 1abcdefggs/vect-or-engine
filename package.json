@@ -7,7 +7,7 @@
   "author": "1abcdefggs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vect-or-edit-or/vect-or-engine"
+    "url": "https://github.com/1abcdefggs/vect-or-engine"
   },
   "napi": {
     "name": "vect-or-engine-napi",
@@ -22,8 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "@napi-rs/cli": "^2.18.0",
-    "@types/node": "^18.19.3",
-    "typescript": "^5.4.0"
+    "@types/node": "^18.19.3"
   },
   "engines": {
     "node": ">= 18"

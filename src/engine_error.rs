@@ -1,3 +1,7 @@
+// Copyright (c) 2026 1abcdefggs
+// SPDX-License-Identifier: MIT
+// https://github.com/1abcdefggs/vect-or-engine
+
 //! Centralized error types for vect-or-engine.
 //! All error variants are typed, allowing callers to branch on specific failures.
 
