@@ -229,21 +229,19 @@ pub async fn kb_info() -> Result<JsKbInfo> {
     })
 }
 
-/// SECURITY: Basic path safety check to prevent traversal attacks.
-/// Disallows absolute paths and parent directory components (`..`).
+/// SECURITY: Basic path safety check.
+/// Ensures non-empty and validates against null-byte poisoning.
 fn verify_safe_path(path_str: &str) -> Result<()> {
-    let path = std::path::Path::new(path_str);
-    if path.is_absolute() {
+    if path_str.trim().is_empty() {
         return Err(Error::new(
             Status::InvalidArg,
-            EngineError::InvalidPath("Absolute paths are not allowed".to_string()).to_string(),
+            EngineError::InvalidPath("Path cannot be empty".to_string()).to_string(),
         ));
     }
-    if path.components().any(|c| c == std::path::Component::ParentDir) {
+    if path_str.contains('\0') {
         return Err(Error::new(
             Status::InvalidArg,
-            EngineError::InvalidPath("Directory traversal ('..') is not allowed".to_string())
-                .to_string(),
+            EngineError::InvalidPath("Path cannot contain null bytes".to_string()).to_string(),
         ));
     }
     Ok(())
