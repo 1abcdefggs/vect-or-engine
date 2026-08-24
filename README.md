@@ -3,7 +3,7 @@
 > **High-Performance Rust-Powered Vector Indexing (HNSW) & Semantic Validation Engine**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
-[![npm](https://img.shields.io/badge/npm-%40vect--or--engine%2Fcore-CB3837?style=flat-square&logo=npm)](https://www.npmjs.com/package/@vect-or-engine/core)
+[![npm](https://img.shields.io/badge/npm-%401abcdefggs%2Fvect--or--engine-CB3837?style=flat-square&logo=npm)](https://github.com/1abcdefggs/vect-or-engine/packages)
 [![Version: v0.2.0](https://img.shields.io/badge/version-0.2.0-indigo?style=flat-square)](package.json)
 [![Rust](https://img.shields.io/badge/Rust-2021_Edition-DEA584?style=flat-square&logo=rust&logoColor=black)](https://www.rust-lang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
@@ -96,8 +96,8 @@ npm test
 ## 📦 Installation
 
 ```bash
-# Via npm
-npm install @vect-or-engine/core
+# Via GitHub Packages / npm
+npm install @1abcdefggs/vect-or-engine
 
 # Or via GitHub Releases / repository
 npm install git+https://github.com/1abcdefggs/vect-or-engine.git#v0.2.0
@@ -114,7 +114,7 @@ import {
   buildIndex,
   search,
   kbInfo
-} from '@vect-or-engine/core';
+} from '@1abcdefggs/vect-or-engine';
 
 // 1. Real-time document validation (Linter)
 const lintResult = validateSync("Target document content...");
