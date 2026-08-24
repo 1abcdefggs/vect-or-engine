@@ -40,6 +40,52 @@ pub struct SlimItem {
     pub metadata: serde_json::Map<String, serde_json::Value>,
 }
 
+/// Query parameter bundle for semantic vector searches.
+///
+/// Encapsulates the query vector, result limits, and optional filters
+/// to prevent data clumps across search APIs.
+#[derive(Debug, Clone)]
+pub struct SearchQuery<'a> {
+    /// The dense query embedding vector.
+    pub vector: &'a [f32],
+    /// Maximum number of matching items to return.
+    pub top_k: usize,
+    /// Minimum cosine similarity score threshold (0.0 .. 1.0).
+    pub min_similarity: Option<f32>,
+    /// Optional slot identifier for multi-vector domain routing.
+    pub slot_id: Option<String>,
+}
+
+impl<'a> SearchQuery<'a> {
+    /// Create a new search query with default settings (`top_k = 10`).
+    pub fn new(vector: &'a [f32]) -> Self {
+        Self {
+            vector,
+            top_k: 10,
+            min_similarity: None,
+            slot_id: None,
+        }
+    }
+
+    /// Set the maximum number of results to return.
+    pub fn with_top_k(mut self, top_k: usize) -> Self {
+        self.top_k = top_k;
+        self
+    }
+
+    /// Set a minimum similarity score threshold.
+    pub fn with_min_similarity(mut self, min_similarity: f32) -> Self {
+        self.min_similarity = Some(min_similarity);
+        self
+    }
+
+    /// Filter results to a specific slot ID.
+    pub fn with_slot_id(mut self, slot_id: impl Into<String>) -> Self {
+        self.slot_id = Some(slot_id.into());
+        self
+    }
+}
+
 // ─── KnowledgeStore ───────────────────────────────────────────────────────────
 
 /// The central in-memory knowledge base with pluggable search backends.
@@ -148,18 +194,31 @@ impl KnowledgeStore {
 
     // ── Search ────────────────────────────────────────────────────────────────
 
-    /// HNSW O(log N) search — use after calling `build_index`.
+    /// Search using a structured `SearchQuery` parameter bundle.
     ///
-    /// Falls back to parallel linear scan if no index exists.
-    pub fn search(&self, query: &[f32], top_k: usize) -> Vec<SearchResult> {
-        if let Some(hnsw) = &self.hnsw {
-            let raw = hnsw.search(query, top_k);
+    /// Handles vector similarity, result capping, and score thresholding.
+    pub fn search_query(&self, query: &SearchQuery) -> Vec<SearchResult> {
+        let results = if let Some(hnsw) = &self.hnsw {
+            let raw = hnsw.search(query.vector, query.top_k);
             raw.into_iter()
                 .map(|(score, idx)| self.make_result(score, idx))
-                .collect()
+                .collect::<Vec<_>>()
         } else {
-            self.linear_search(query, top_k)
+            self.linear_search(query.vector, query.top_k)
+        };
+
+        if let Some(min_score) = query.min_similarity {
+            results.into_iter().filter(|r| r.score >= min_score).collect()
+        } else {
+            results
         }
+    }
+
+    /// HNSW O(log N) search — use after calling `build_index`.
+    ///
+    /// Retained for ergonomic backward compatibility; delegates to `search_query`.
+    pub fn search(&self, query: &[f32], top_k: usize) -> Vec<SearchResult> {
+        self.search_query(&SearchQuery::new(query).with_top_k(top_k))
     }
 
     /// Parallel rayon linear scan — O(N) with SIMD dot product.
@@ -384,5 +443,21 @@ mod tests {
         assert!(!results.is_empty());
         // Node 5 should appear in top results (it is an exact unit vector match).
         assert!(results.iter().any(|r| r.idx == 5));
+    }
+
+    #[test]
+    fn search_query_builder_and_threshold() {
+        let store = make_store(50, 64);
+        let mut query_vec = vec![0.0f32; 64];
+        query_vec[0] = 1.0;
+
+        let query = SearchQuery::new(&query_vec)
+            .with_top_k(5)
+            .with_min_similarity(0.5);
+
+        let results = store.search_query(&query);
+        assert!(!results.is_empty());
+        assert!(results.iter().all(|r| r.score >= 0.5));
+        assert_eq!(results[0].idx, 0);
     }
 }
