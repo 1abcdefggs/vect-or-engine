@@ -18,7 +18,7 @@
 > 🔗 **Zero-Cost Interoperability**: Direct C-ABI native bindings via `napi-rs`, completely eliminating IPC serialization and network latency.
 
 - **Repository**: [https://github.com/1abcdefggs/vect-or-engine](https://github.com/1abcdefggs/vect-or-engine)
-- **Author / Copyright**: Copyright (c) 2026 1abcdefggs
+- **Author / Copyright**: Copyright (c) 2026 [@1abcdefggs](https://github.com/1abcdefggs)
 
 ---
 
@@ -120,4 +120,4 @@ const results = await search(queryVector, 5); // Top-5 nearest neighbors
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).  
-Copyright (c) 2026 1abcdefggs.
+Copyright (c) 2026 [@1abcdefggs](https://github.com/1abcdefggs).
