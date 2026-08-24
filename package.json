@@ -1,5 +1,5 @@
 {
-  "name": "@vect-or-engine/core",
+  "name": "@1abcdefggs/vect-or-engine",
   "version": "0.2.0",
   "description": "Ultra-fast local-first vector search (HNSW + SIMD) and real-time semantic document linting native engine in Rust with zero-overhead N-API bindings for Node.js and Electron.",
   "main": "index.js",
@@ -39,7 +39,7 @@
     "url": "https://github.com/1abcdefggs/vect-or-engine.git"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   },
   "napi": {
     "name": "vect-or-engine-napi",
