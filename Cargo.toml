@@ -13,6 +13,10 @@ name = "vect_or_engine_lib"
 path = "lib.rs"
 crate-type = ["cdylib", "rlib"]
 
+[[bin]]
+name = "vect_or_engine_cli"
+path = "src/main.rs"
+
 [dependencies]
 # N-API bindings
 napi = { version = "2", default-features = false, features = ["napi4", "tokio_rt", "serde-json"] }
