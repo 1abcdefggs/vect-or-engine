@@ -14,10 +14,26 @@ use napi::bindgen_prelude::*;
 use once_cell::sync::Lazy;
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use vect_or_engine_lib::{
-    EngineError, KnowledgeStore, Profile, SearchResult, Translator, Validator, ValidationMarker,
-    ValidationResult,
-};
+
+#[path = "src/engine_error.rs"]
+pub mod engine_error;
+#[path = "src/profile.rs"]
+pub mod profile;
+#[path = "src/validator.rs"]
+pub mod validator;
+#[path = "src/translator.rs"]
+pub mod translator;
+#[path = "src/hnsw_index.rs"]
+pub mod hnsw_index;
+#[path = "src/knowledge_store.rs"]
+pub mod knowledge_store;
+
+pub use engine_error::EngineError;
+pub use hnsw_index::HnswIndex;
+pub use knowledge_store::{KnowledgeItem, KnowledgeStore, SearchQuery, SearchResult};
+pub use profile::Profile;
+pub use translator::{TranslationMatch, Translator};
+pub use validator::{ValidationMarker, ValidationResult, Validator};
 
 // --- Global Engine State ---
 
