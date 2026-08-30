@@ -67,10 +67,14 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         localFileExisted = existsSync(
+          join(__dirname, 'vect-or-engine-v0.3.0.node')
+        ) || existsSync(
           join(__dirname, 'vect-or-engine-napi.win32-x64-msvc.node')
         )
         try {
-          if (localFileExisted) {
+          if (existsSync(join(__dirname, 'vect-or-engine-v0.3.0.node'))) {
+            nativeBinding = require('./vect-or-engine-v0.3.0.node')
+          } else if (existsSync(join(__dirname, 'vect-or-engine-napi.win32-x64-msvc.node'))) {
             nativeBinding = require('./vect-or-engine-napi.win32-x64-msvc.node')
           } else {
             nativeBinding = require('vect-or-engine-win32-x64-msvc')

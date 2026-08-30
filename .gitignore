@@ -42,3 +42,5 @@ pnpm-debug.log*
 # Local Archives & Agent configs
 _archive/
 .agents/
+_domain-modeling/
+CODE_REVIEW/

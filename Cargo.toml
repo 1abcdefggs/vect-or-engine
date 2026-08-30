@@ -1,6 +1,6 @@
 [package]
-name = "vect_or_engine_lib"
-version = "0.2.0"
+name = "vect_or_engine_v0.3.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["1abcdefggs"]
 description = "High-performance vector search (HNSW) and semantic validation engine in Rust"
@@ -9,12 +9,12 @@ repository = "https://github.com/1abcdefggs/vect-or-engine"
 readme = "README.md"
 
 [lib]
-name = "vect_or_engine_lib"
+name = "vect_or_engine_v0.3.0_lib"
 path = "lib.rs"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name = "vect_or_engine_cli"
+name = "vect_or_engine_v0.3.0_cli"
 path = "src/main.rs"
 
 [dependencies]
