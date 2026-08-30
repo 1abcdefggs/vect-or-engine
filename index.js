@@ -1,7 +1,3 @@
-// Copyright (c) 2026 1abcdefggs
-// SPDX-License-Identifier: MIT
-// https://github.com/1abcdefggs/vect-or-engine
-
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
@@ -36,24 +32,24 @@ switch (platform) {
   case 'android':
     switch (arch) {
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'vect-or-engine-napi.android-arm64.node'))
+        localFileExisted = existsSync(join(__dirname, 'vect-or-engine-v0.3.0.android-arm64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.android-arm64.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.android-arm64.node')
           } else {
-            nativeBinding = require('vect-or-engine-android-arm64')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-android-arm64')
           }
         } catch (e) {
           loadError = e
         }
         break
       case 'arm':
-        localFileExisted = existsSync(join(__dirname, 'vect-or-engine-napi.android-arm-eabi.node'))
+        localFileExisted = existsSync(join(__dirname, 'vect-or-engine-v0.3.0.android-arm-eabi.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.android-arm-eabi.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.android-arm-eabi.node')
           } else {
-            nativeBinding = require('vect-or-engine-android-arm-eabi')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-android-arm-eabi')
           }
         } catch (e) {
           loadError = e
@@ -67,17 +63,13 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         localFileExisted = existsSync(
-          join(__dirname, 'vect-or-engine-v0.3.0.node')
-        ) || existsSync(
-          join(__dirname, 'vect-or-engine-napi.win32-x64-msvc.node')
+          join(__dirname, 'vect-or-engine-v0.3.0.win32-x64-msvc.node')
         )
         try {
-          if (existsSync(join(__dirname, 'vect-or-engine-v0.3.0.node'))) {
-            nativeBinding = require('./vect-or-engine-v0.3.0.node')
-          } else if (existsSync(join(__dirname, 'vect-or-engine-napi.win32-x64-msvc.node'))) {
-            nativeBinding = require('./vect-or-engine-napi.win32-x64-msvc.node')
+          if (localFileExisted) {
+            nativeBinding = require('./vect-or-engine-v0.3.0.win32-x64-msvc.node')
           } else {
-            nativeBinding = require('vect-or-engine-win32-x64-msvc')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-win32-x64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -85,13 +77,13 @@ switch (platform) {
         break
       case 'ia32':
         localFileExisted = existsSync(
-          join(__dirname, 'vect-or-engine-napi.win32-ia32-msvc.node')
+          join(__dirname, 'vect-or-engine-v0.3.0.win32-ia32-msvc.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.win32-ia32-msvc.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.win32-ia32-msvc.node')
           } else {
-            nativeBinding = require('vect-or-engine-win32-ia32-msvc')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-win32-ia32-msvc')
           }
         } catch (e) {
           loadError = e
@@ -99,13 +91,13 @@ switch (platform) {
         break
       case 'arm64':
         localFileExisted = existsSync(
-          join(__dirname, 'vect-or-engine-napi.win32-arm64-msvc.node')
+          join(__dirname, 'vect-or-engine-v0.3.0.win32-arm64-msvc.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.win32-arm64-msvc.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.win32-arm64-msvc.node')
           } else {
-            nativeBinding = require('vect-or-engine-win32-arm64-msvc')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-win32-arm64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -116,23 +108,23 @@ switch (platform) {
     }
     break
   case 'darwin':
-    localFileExisted = existsSync(join(__dirname, 'vect-or-engine-napi.darwin-universal.node'))
+    localFileExisted = existsSync(join(__dirname, 'vect-or-engine-v0.3.0.darwin-universal.node'))
     try {
       if (localFileExisted) {
-        nativeBinding = require('./vect-or-engine-napi.darwin-universal.node')
+        nativeBinding = require('./vect-or-engine-v0.3.0.darwin-universal.node')
       } else {
-        nativeBinding = require('vect-or-engine-darwin-universal')
+        nativeBinding = require('@1abcdefggs/vect-or-engine-darwin-universal')
       }
       break
     } catch {}
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'vect-or-engine-napi.darwin-x64.node'))
+        localFileExisted = existsSync(join(__dirname, 'vect-or-engine-v0.3.0.darwin-x64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.darwin-x64.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.darwin-x64.node')
           } else {
-            nativeBinding = require('vect-or-engine-darwin-x64')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-darwin-x64')
           }
         } catch (e) {
           loadError = e
@@ -140,13 +132,13 @@ switch (platform) {
         break
       case 'arm64':
         localFileExisted = existsSync(
-          join(__dirname, 'vect-or-engine-napi.darwin-arm64.node')
+          join(__dirname, 'vect-or-engine-v0.3.0.darwin-arm64.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.darwin-arm64.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.darwin-arm64.node')
           } else {
-            nativeBinding = require('vect-or-engine-darwin-arm64')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-darwin-arm64')
           }
         } catch (e) {
           loadError = e
@@ -160,12 +152,12 @@ switch (platform) {
     if (arch !== 'x64') {
       throw new Error(`Unsupported architecture on FreeBSD: ${arch}`)
     }
-    localFileExisted = existsSync(join(__dirname, 'vect-or-engine-napi.freebsd-x64.node'))
+    localFileExisted = existsSync(join(__dirname, 'vect-or-engine-v0.3.0.freebsd-x64.node'))
     try {
       if (localFileExisted) {
-        nativeBinding = require('./vect-or-engine-napi.freebsd-x64.node')
+        nativeBinding = require('./vect-or-engine-v0.3.0.freebsd-x64.node')
       } else {
-        nativeBinding = require('vect-or-engine-freebsd-x64')
+        nativeBinding = require('@1abcdefggs/vect-or-engine-freebsd-x64')
       }
     } catch (e) {
       loadError = e
@@ -176,26 +168,26 @@ switch (platform) {
       case 'x64':
         if (isMusl()) {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-x64-musl.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-x64-musl.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-x64-musl.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-x64-musl.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-x64-musl')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-x64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-x64-gnu.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-x64-gnu.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-x64-gnu.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-x64-gnu.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-x64-gnu')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-x64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -205,26 +197,26 @@ switch (platform) {
       case 'arm64':
         if (isMusl()) {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-arm64-musl.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-arm64-musl.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-arm64-musl.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-arm64-musl.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-arm64-musl')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-arm64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-arm64-gnu.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-arm64-gnu.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-arm64-gnu.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-arm64-gnu.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-arm64-gnu')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-arm64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -234,26 +226,26 @@ switch (platform) {
       case 'arm':
         if (isMusl()) {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-arm-musleabihf.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-arm-musleabihf.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-arm-musleabihf.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-arm-musleabihf.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-arm-musleabihf')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-arm-musleabihf')
             }
           } catch (e) {
             loadError = e
           }
         } else {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-arm-gnueabihf.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-arm-gnueabihf.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-arm-gnueabihf.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-arm-gnueabihf.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-arm-gnueabihf')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-arm-gnueabihf')
             }
           } catch (e) {
             loadError = e
@@ -263,26 +255,26 @@ switch (platform) {
       case 'riscv64':
         if (isMusl()) {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-riscv64-musl.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-riscv64-musl.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-riscv64-musl.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-riscv64-musl.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-riscv64-musl')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-riscv64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
           localFileExisted = existsSync(
-            join(__dirname, 'vect-or-engine-napi.linux-riscv64-gnu.node')
+            join(__dirname, 'vect-or-engine-v0.3.0.linux-riscv64-gnu.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./vect-or-engine-napi.linux-riscv64-gnu.node')
+              nativeBinding = require('./vect-or-engine-v0.3.0.linux-riscv64-gnu.node')
             } else {
-              nativeBinding = require('vect-or-engine-linux-riscv64-gnu')
+              nativeBinding = require('@1abcdefggs/vect-or-engine-linux-riscv64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -291,13 +283,13 @@ switch (platform) {
         break
       case 's390x':
         localFileExisted = existsSync(
-          join(__dirname, 'vect-or-engine-napi.linux-s390x-gnu.node')
+          join(__dirname, 'vect-or-engine-v0.3.0.linux-s390x-gnu.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./vect-or-engine-napi.linux-s390x-gnu.node')
+            nativeBinding = require('./vect-or-engine-v0.3.0.linux-s390x-gnu.node')
           } else {
-            nativeBinding = require('vect-or-engine-linux-s390x-gnu')
+            nativeBinding = require('@1abcdefggs/vect-or-engine-linux-s390x-gnu')
           }
         } catch (e) {
           loadError = e
@@ -318,10 +310,12 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { ping, validateSync, loadKnowledgeBase, loadKbCache, saveKbCache, buildIndex, search, kbInfo } = nativeBinding
+const { ping, validateSync, validate, loadProfile, loadKnowledgeBase, loadKbCache, saveKbCache, buildIndex, search, kbInfo } = nativeBinding
 
 module.exports.ping = ping
 module.exports.validateSync = validateSync
+module.exports.validate = validate
+module.exports.loadProfile = loadProfile
 module.exports.loadKnowledgeBase = loadKnowledgeBase
 module.exports.loadKbCache = loadKbCache
 module.exports.saveKbCache = saveKbCache

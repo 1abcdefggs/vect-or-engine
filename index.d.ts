@@ -1,7 +1,3 @@
-// Copyright (c) 2026 1abcdefggs
-// SPDX-License-Identifier: MIT
-// https://github.com/1abcdefggs/vect-or-engine
-
 /* tslint:disable */
 /* eslint-disable */
 
@@ -11,6 +7,7 @@
 export declare function ping(name: string): string
 export interface JsValidationMarker {
   line: number
+  severity: string
   message: string
 }
 export interface JsValidationResult {
@@ -28,8 +25,10 @@ export interface JsKbInfo {
   dim: number
   hnswReady: boolean
 }
-/** Validates a document using the default profile. */
+/** Validates a document using the currently loaded profile. */
 export declare function validateSync(text: string): JsValidationResult
+export declare function validate(text: string): Promise<JsValidationResult>
+export declare function loadProfile(path: string): Promise<void>
 export declare function loadKnowledgeBase(path: string): Promise<number>
 export declare function loadKbCache(path: string): Promise<number>
 export declare function saveKbCache(path: string): Promise<void>

@@ -1,5 +1,5 @@
 [package]
-name = "vect_or_engine_v0.3.0"
+name = "vect_or_engine"
 version = "0.3.0"
 edition = "2021"
 authors = ["1abcdefggs"]
@@ -9,12 +9,12 @@ repository = "https://github.com/1abcdefggs/vect-or-engine"
 readme = "README.md"
 
 [lib]
-name = "vect_or_engine_v0.3.0_lib"
+name = "vect_or_engine"
 path = "lib.rs"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name = "vect_or_engine_v0.3.0_cli"
+name = "vect_or_engine_cli"
 path = "src/main.rs"
 
 [dependencies]
