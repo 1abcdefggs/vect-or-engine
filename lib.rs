@@ -38,6 +38,7 @@ pub use validator::{ValidationMarker, ValidationResult, Validator};
 // --- Global Engine State ---
 
 /// The single, global, thread-safe engine instance.
+#[allow(dead_code)]
 struct Engine {
     profile: Profile,
     validator: Validator,
