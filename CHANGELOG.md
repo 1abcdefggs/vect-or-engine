@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.4] - 2026-09-20
+
+### Added
+- **Automated GitHub Release Binary Upload**: Updated `.github/workflows/publish-package.yml` with `contents: write` permissions and `gh release upload` step to automatically attach compiled native binary addons (`*.node`) to GitHub Releases upon publication.
+
+### Changed
+- **Node.js 24 Environment Maintenance**: Explicitly set and maintained `node-version: 24` in release workflows for modern runner compatibility.
+
+---
+
 ## [0.3.3] - 2026-09-20
 
 ### Changed
